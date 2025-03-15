@@ -1,0 +1,681 @@
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F2F2F2; /* Fondo suave y claro */
+    color: #5A5A5A; /* Texto en gris oscuro para contraste suave */
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo claro y suave */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.4s, box-shadow 0.3s;
+}
+
+header.scrolled {
+    background-color: #D7A98D; /* Color cálido al hacer scroll */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Redes sociales */
+.rs-container {
+    display: none;
+}
+
+.logo {
+    max-width: 5rem;
+}
+
+/* Navegación */
+.nav-list {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: #5A5A5A; /* Texto en gris suave */
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-list li a:hover {
+    color: #5A5A5A; /* Gris en hover */
+    background-color: #D7A98D; /* Color cálido en hover */
+    border-radius: 5px;
+}
+
+.nav-list li a::before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #ffffff;
+    left: 50%;
+    bottom: 0;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
+
+.nav-list li a:hover::before {
+    width: 100%;
+    background-color: #EEC1A1; /* Color cálido sutil */
+}
+
+.rs-logo:hover {
+    background-color: #D7A98D; /* Fondo cálido */
+    color: #ffffff; /* Texto blanco */
+}
+
+.rs-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 0.5rem;
+    border-radius: 50%;
+    background-color: #A57C4E; /* Fondo terroso */
+    color: #F5E1C7; /* Color claro y suave */
+    font-size: 1.5rem;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 1.2rem;
+}
+
+/* Abrir/Cerrar Menú */
+.abrir-menu,
+.cerrar-menu {
+    display: none;
+}
+
+/* Redes Sociales Hover */
+.rs-logo img {
+    max-width: 2rem;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Responsive */
+@media screen and (max-width: 550px) {
+    .abrir-menu,
+    .cerrar-menu {
+        display: block;
+        border: 0;
+        font-size: 1.5rem;
+        background-color: transparent;
+        cursor: pointer;
+        color: #5A5A5A; /* Texto gris suave */
+        transition: color 0.3s ease-in-out;
+    }
+
+    .rs-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .rs-logo {
+        width: 2rem; /* Tamaño ajustado para móviles */
+        height: 2rem;
+        font-size: 1.2rem;
+    }
+
+    .logo-rs {
+        width: 1.3rem;
+    }
+
+    .abrir-menu:hover,
+    .cerrar-menu:hover {
+        color: #ffffff; /* Blanco en hover */
+    }
+
+    .nav {
+        opacity: 0;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #A57C4E; /* Fondo terroso */
+        padding: 3rem;
+        z-index: 1000;
+        transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.3s ease-in-out;
+        transform: translateY(-100%);
+    }
+
+    .nav.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-list li a {
+        color: #ececec;
+        font-size: 1.5rem;
+        text-decoration: none;
+        font-weight: bold;
+        text-align: center;
+        transition: color 0.3s, transform 0.3s ease-in-out;
+    }
+
+    .nav-list li a:hover {
+        color: #5A5A5A; /* Gris en hover */
+        transform: scale(1.1);
+    }
+
+    .nav.visible {
+        background: rgba(245, 169, 126, 0.9); /* Fondo cálido y suave */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .cerrar-menu {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 2rem;
+        color: #ffffff;
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    .cerrar-menu:hover {
+        color: #D7A98D; /* Color cálido */
+        transform: rotate(90deg);
+    }
+}
+
+---------
+
+  /* Estilo general de la barra de scroll */
+::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra */
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #D7A98D, #A57C4E); /* Colores cálidos y terrosos */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Efecto de sombra suave */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #A57C4E, #D7A98D); /* Cambio al pasar el cursor */
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(242, 242, 242, 0.9); /* Fondo suave y claro */
+    border-radius: 5px;
+}
+
+
+/* Agregar el efecto de scroll a cada sección */
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2, h3, p {
+    color: #5A5A5A; /* Texto en gris oscuro suave */
+}
+
+/* Agregar márgenes entre secciones */
+section {
+    margin-bottom: 50px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.modal-content {
+    background-color: #F2F2F2; /* Fondo suave y claro */
+    color: #5A5A5A; /* Color de texto suave */
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal-content h2 {
+    color: #D7A98D; /* Color cálido y suave */
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    background-color: #D7A98D; /* Color cálido de contraste */
+    color: #5A5A5A; /* Texto gris oscuro */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal-content button:hover {
+    background-color: #A57C4E; /* Fondo más oscuro y terroso */
+    color: #FFFFFF; /* Texto blanco */
+}
+
+.modal.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Formulario */
+.contactenos-box {
+    background: linear-gradient(to bottom right, #F9F9F9, #F9F9F9); /* Fondo muy suave y claro */
+    padding: 20px;
+    border-top: 2px solid #D7A98D; /* Línea decorativa suave con un tono cálido */
+    border-bottom: 2px solid #D7A98D;
+}
+
+.contact {
+    background: rgba(242, 242, 242, 0.8); /* Fondo suave y transparente */
+    backdrop-filter: blur(10px);
+    color: #5A5A5A; /* Texto oscuro suave */
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contact h1 {
+    color: #D7A98D; /* Tono cálido, suave */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.contact label {
+    display: block;
+    margin-bottom: 8px;
+    color: #5A5A5A; /* Gris oscuro suave para los labels */
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contact input,
+.contact textarea,
+.contact button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #D7A98D; /* Color cálido de contraste */
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: #5A5A5A; /* Color de texto suave */
+}
+
+.contact textarea {
+    resize: none;
+    height: 120px;
+}
+
+.contact button,
+.modal-content button {
+    background-color: #D7A98D; /* Color cálido suave */
+    color: #5A5A5A; /* Texto gris oscuro suave */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact button:hover,
+.modal-content button:hover {
+    background-color: #A57C4E; /* Fondo más oscuro y terroso */
+    color: #FFFFFF; /* Texto blanco */
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .contact {
+        padding: 20px;
+    }
+
+    .contact h1 {
+        font-size: 1.5rem;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+/* Footer */
+.footer {
+    background-color: #F4F4F4; /* Fondo claro y suave */
+    color: #5A5A5A; /* Texto gris oscuro suave */
+    text-align: center;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif; /* Tipografía moderna y legible */
+    opacity: 0; /* Inicialmente oculto */
+    transform: translateY(20px); /* Desplazado hacia abajo */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.footer-logo {
+    max-width: 120px; /* Tamaño más pequeño y sutil */
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.footer-divider {
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Línea muy suave y discreta */
+    margin: 15px auto;
+    width: 80%;
+}
+
+.footer-copyright {
+    font-size: 0.9rem;
+    color: #D7A98D; /* Color cálido suave, que armoniza con el diseño */
+    margin: 0;
+}
+
+/* Responsivo Design */
+@media (max-width: 600px) {
+    .footer-logo {
+        max-width: 90px; /* Tamaño reducido en móviles */
+    }
+
+    .footer-divider {
+        width: 90%;
+    }
+
+    .footer-copyright {
+        font-size: 0.8rem;
+    }
+}
+
+/* Animación cuando se hace visible */
+.footer.visible {
+    opacity: 1;
+    transform: translateY(0); /* Vuelve a su posición original */
+}
+
+
+/* Hero Section */
+.videohome {
+    position: relative;
+    width: 100%;
+    height: 90vh; /* Ajustada para un fondo visual impactante */
+    overflow: hidden;
+}
+
+/* Video de fondo */
+.video-home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Hero Section */
+.hero-section {
+    width: 100%;
+    height: 60vh; /* Aumentada para ser más prominente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #F4F4F4; /* Fondo suave */
+    border-top: 2px solid #D7A98D; /* Línea decorativa con color actualizado */
+    border-bottom: 2px solid #D7A98D; /* Línea decorativa con color actualizado */
+    padding: 3rem 1.5rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Suaviza transiciones */
+}
+
+/* Texto */
+.hero-section h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem; /* Tamaño grande para mayor impacto */
+    color: #D7A98D; /* Color actualizado */
+    margin: 0;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.hero-section p {
+    font-family: 'Lora', sans-serif;
+    font-size: 1.4rem;
+    color: #5A5A5A; /* Color actualizado */
+    margin: 1rem 0;
+    animation: fadeIn 2s ease-out;
+}
+
+/* Botón CTA */
+.cta-button {
+    font-family: 'Lora', sans-serif;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #D7A98D; /* Color principal actualizado */
+    border: none;
+    border-radius: 10px;
+    padding: 0.8rem 2rem;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #5A5A5A; /* Color de hover actualizado */
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2); /* Sombra sutil y cálida */
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .hero-section {
+        height: auto;
+        padding: 3rem 2rem;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1.1rem;
+    }
+
+    .cta-button {
+        font-size: 1rem;
+        padding: 0.6rem 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+
+/* Sección de Productos */
+.products-section {
+    width: 100%;
+    padding: 4rem 2rem;
+    background-color: #F4F4F4;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Título de la sección */
+.products-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #D7A98D; /* Color actualizado */
+}
+
+/* Contenedor de las Cards */
+.products-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo de cada card */
+.product-card {
+    background-color: #FFFFFF;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0; /* Inicialmente ocultas */
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efecto de aparición escalonada */
+.product-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+.product-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+.product-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.product-card:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+/* Imagen dentro de la card */
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Título de la card */
+.product-card h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.8rem;
+    color: #D7A98D; /* Color actualizado */
+    margin-bottom: 0.5rem;
+}
+
+/* Descripción de la card */
+.product-card p {
+    font-family: 'Lora', sans-serif;
+    font-size: 1rem;
+    color: #5A5A5A; /* Color actualizado */
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .product-card {
+        padding: 1rem;
+    }
+}
+
+
+
+
+
+
+
+  
+  
+  
+  
